@@ -1,2 +1,5 @@
-*.exe
+**/*.exe
 *.env
+./boulder-track-backend.exe~
+# CompileDaemon -command="./boulder-track-backend"
+# go run migrate/migrate.go

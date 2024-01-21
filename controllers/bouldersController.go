@@ -6,21 +6,23 @@ import (
 	"github.com/jayyy-s/boulder-track-backend/models"
 )
 
+var boulderBody struct {
+	Grade   string
+	PicLink string
+	Gym     string
+	UserID  int
+}
+
 func BouldersCreate(c *gin.Context) {
 	// get data from body
-	var body struct {
-		Grade   string
-		PicLink string
-		Gym     string
-	}
-
-	c.Bind(&body)
+	c.Bind(&boulderBody)
 
 	// create boulder
 	boulder := models.Boulder{
-		Grade:   body.Grade,
-		PicLink: body.PicLink,
-		Gym:     body.Gym,
+		Grade:   boulderBody.Grade,
+		PicLink: boulderBody.PicLink,
+		Gym:     boulderBody.Gym,
+		UserID:     boulderBody.UserID,
 	}
 
 	result := initializers.DB.Create(&boulder)
@@ -68,13 +70,7 @@ func BouldersUpdate(c *gin.Context) {
 	id := c.Param("id")
 
 	// get data from req body
-	var body struct {
-		Grade   string
-		PicLink string
-		Gym     string
-	}
-
-	c.Bind(&body)
+	c.Bind(&boulderBody)
 
 	// find the boulder being updated
 	var boulder models.Boulder
@@ -82,9 +78,10 @@ func BouldersUpdate(c *gin.Context) {
 
 	// update
 	initializers.DB.Model(&boulder).Updates(models.Boulder{
-		Grade:   body.Grade,
-		PicLink: body.PicLink,
-		Gym:     body.Gym,
+		Grade:   boulderBody.Grade,
+		PicLink: boulderBody.PicLink,
+		Gym:     boulderBody.Gym,
+		UserID:     boulderBody.UserID,
 	})
 
 	// respond

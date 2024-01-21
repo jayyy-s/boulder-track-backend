@@ -4,7 +4,8 @@ import "gorm.io/gorm"
 
 type Boulder struct {
 	gorm.Model
-	Grade string
+	Grade   string
 	PicLink string
-	Gym string
+	Gym     string
+	UserID  int
 }
